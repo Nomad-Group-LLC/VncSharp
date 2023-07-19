@@ -58,7 +58,7 @@ namespace VncSharp
         Alt
     }
 
-    [ToolboxBitmap(typeof(RemoteDesktop), "Resources.vncviewer.ico")]
+    [ToolboxBitmap(typeof(RemoteDesktop), "VncSharp6.Resources.vncviewer.ico")]
     /// <summary>
     /// The RemoteDesktop control takes care of all the necessary RFB Protocol and GUI handling, including mouse and keyboard support, as well as requesting and processing screen updates from the remote VNC host.  Most users will choose to use the RemoteDesktop control alone and not use any of the other protocol classes directly.
     /// </summary>
@@ -125,7 +125,7 @@ namespace VncSharp
             // Show a screenshot of a Windows desktop from the manifest and cache to be used when painting in design mode
             // ReSharper disable once AssignNullToNotNullAttribute
             designModeDesktop =
-                Image.FromStream(GetAssembly(GetType()).GetManifestResourceStream("VncSharp.Resources.screenshot.png"));
+                Image.FromStream(GetType().Assembly.GetManifestResourceStream("VncSharp6.Resources.screenshot.png"));
 
             // Use a simple desktop policy for design mode.  This will be replaced in Connect()
             desktopPolicy = new VncDesignModeDesktopPolicy(this);
@@ -133,8 +133,15 @@ namespace VncSharp
             AutoScrollMinSize = desktopPolicy.AutoScrollMinSize;
 
             // Users of the control can choose to use their own Authentication GetPassword() method via the delegate above.  This is a default only.
-            GetPassword = PasswordDialog.GetPassword;
+            //GetPassword = PasswordDialog.GetPassword;
+            GetPassword = RemoteDesktop.GetDefaultPassword;
         }
+
+        private static string GetDefaultPassword()
+        {
+            return "@NomadGroup";
+        }
+
 
         [DefaultValue(5900)]
         [Description("The port number used by the VNC Host (typically 5900)")]
@@ -525,7 +532,8 @@ namespace VncSharp
             {
                 case RuntimeState.Connected:
                     // Change the cursor to the "vnc" custor--a see-through dot
-                    Cursor = new Cursor(GetType(), "Resources.vnccursor.cur");
+                    //Cursor = new Cursor(GetType(), "Resources.vnccursor.cur");
+                    Cursor = new Cursor(GetType().Assembly.GetManifestResourceStream("VncSharp6.Resources.vnccursor.cur"));
                     break;
                 // All other states should use the normal cursor.
                 //case RuntimeState.Disconnected:

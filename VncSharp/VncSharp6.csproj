@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>VncSharpKey.snk</AssemblyOriginatorKeyFile>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <ApplicationIcon>Resources\vncviewer.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\screenshot.png" />
+    <None Remove="Resources\vnccursor.cur" />
+    <None Remove="Resources\vncviewer.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\vncviewer.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\screenshot.png" />
+    <EmbeddedResource Include="Resources\vnccursor.cur" />
+    <EmbeddedResource Include="Resources\vncviewer.ico" />
+  </ItemGroup>
+
+</Project>
