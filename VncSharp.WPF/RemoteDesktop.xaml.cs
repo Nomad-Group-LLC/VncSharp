@@ -25,9 +25,11 @@ namespace VncSharp.WPF
             InitializeComponent();
         }
 
-        public void Connect(string host)
+        public void Connect(string host, int hostPort)
         {
             if (vnc.IsConnected) vnc.Disconnect();
+            vnc.VncPort = hostPort;
+            if (string.IsNullOrEmpty(host)) return;
             vnc.Connect(host, false, true);
         }
 

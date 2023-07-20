@@ -160,7 +160,11 @@ namespace VncSharp
 
 			tcp.ReceiveTimeout = RECEIVE_TIMEOUT; // set receive timeout (15s default)
 			tcp.SendTimeout = SEND_TIMEOUT;    // set send timeout to (15s default)
+
+
 			tcp.Connect(host, port);
+			
+
 			stream = tcp.GetStream();
 
 			stream.ReadTimeout = RECEIVE_TIMEOUT; // set read timeout to (15s default)
